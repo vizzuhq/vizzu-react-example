@@ -1,6 +1,6 @@
 # Getting Started with Vizzu in React
 
-If you're here for a description, please see the docs on (Github Pages)[https://vizzuhq.github.io/vizzu-react-example/]
+If you're here for a description, please see the docs on [Github Page](https://vizzuhq.github.io/vizzu-react-example/)
 
 ## Running this project on your machine
 
