@@ -70,11 +70,11 @@ You should change value of the `scripts` key in your package.json in the root of
 }
 ```
 
-## Install vizzu with npm
+## Reinstall with npm
 
 ```bash
 cd my_react_vizzu_project
-npm install vizzu
+npm install
 ```
 
 Because of our postinstall setup above, this should also create a new folder in our public/ folder with the .wasm file in it.
@@ -135,7 +135,7 @@ function App() {
       },
     })
   );
-  return <canvas id="myVizzu" style={{ width: "800px", height: "480px" }} />;
+  return <canvas id="myVizzu" style={ { width: "800px", height: "480px" } } />;
 }
 
 export default App;
@@ -186,7 +186,7 @@ function App() {
     <canvas
       ref={canvasRef}
       id="myVizzu"
-      style={{ width: "800px", height: "480px" }}
+      style={ { width: "800px", height: "480px" } }
     />
   );
 }
@@ -240,7 +240,7 @@ function App() {
 
   return (
     <div id="wrapper">
-      <canvas ref={canvasRef} style={{ width: "800px", height: "480px" }} />
+      <canvas ref={canvasRef} style={ { width: "800px", height: "480px" } } />
       <div id="breakdownChooser">
         <h2>Break it down by</h2>
         {dimensions.map((dim) => {
