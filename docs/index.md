@@ -126,6 +126,8 @@ export const data = {
 
 Replace the contents of src/App.js with the following.
 
+{%raw%}
+
 ```javascript
 // src/App.js
 import Vizzu from "vizzu";
@@ -149,6 +151,8 @@ function App() {
 export default App;
 ```
 
+{%endraw%}
+
 Let's run it!
 
 ```bash
@@ -166,6 +170,8 @@ The problem is that both Vizzu and React want to modify the DOM directly and onc
 As we have seen above Vizzu requires an imperative handle on the state of the canvas element, but we want React to be responsible for the overall structure of our page. In React Hooks this separation is usually accomplished using the `useRef()` and `useEffect()` hooks together (see (React docs)[https://reactjs.org/docs/hooks-reference.html#useref]).
 
 We can rewrite our src/App.js accordingly:
+
+{%raw%}
 
 ```javascript
 // src/App.js
@@ -202,12 +208,16 @@ function App() {
 export default App;
 ```
 
+{%endraw%}
+
 When we save the file, after a brief load, simple bar chart should be displayed in the same browser window.
 If we hadn't had set up .wasm loading by this point, compilation in Webpack would still fail because the Vizzu package wouldn't be able to find its .wasm files.
 
 ## Add interactivity
 
 We could stop here, but there would have been absolutely no point in using React as we are displaying a static chart. Let's add a couple buttons to enable changing between different dimensions.
+
+{%raw%}
 
 ```javascript
 //src/App.js
@@ -270,6 +280,8 @@ function App() {
 
 export default App;
 ```
+
+{%endraw%}
 
 Notice that we've added another `useRef()`. We need this to keep track of our `chart` object between renders, so we can initiate animations in the new `useEffect()`. In most production settings this will be necessary.
 
