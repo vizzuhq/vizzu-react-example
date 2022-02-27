@@ -128,7 +128,7 @@ Replace the contents of src/App.js with the following.
 
 {%raw%}
 
-```javascript
+```jsx
 // src/App.js
 import Vizzu from "vizzu";
 import { data } from "./demoData";
@@ -173,7 +173,7 @@ We can rewrite our src/App.js accordingly:
 
 {%raw%}
 
-```javascript
+```jsx
 // src/App.js
 import Vizzu from "vizzu";
 import { data } from "./demoData";
@@ -219,7 +219,7 @@ We could stop here, but there would have been absolutely no point in using React
 
 {%raw%}
 
-```javascript
+```jsx
 //src/App.js
 import Vizzu from "vizzu";
 import { data } from "./demoData";
