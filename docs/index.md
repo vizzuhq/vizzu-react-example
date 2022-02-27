@@ -1,3 +1,7 @@
+---
+render_with_liquid: false
+---
+
 Using Vizzu with React and the usual tooling around it (namely, module bundlers) is not trivial.
 This document provides step-by-step instructions to setting up a working Vizzu project with React. For the sake of simplicity, we will use the create-react-app (CRA) package to scaffold our project but the lessons learnt can be applied to existing or new projects even if they don't use Webpack like CRA does.
 
@@ -70,14 +74,18 @@ You should change value of the `scripts` key in your package.json in the root of
 }
 ```
 
-## Reinstall with npm
+## Install Vizzu with npm
 
 ```bash
-cd my_react_vizzu_project
-npm install
+npm install vizzu
 ```
 
-Because of our postinstall setup above, this should also create a new folder in our public/ folder with the .wasm file in it.
+Because of our postinstall setup above, this should also create a new folder in our public/ folder with the .wasm file in it.  
+If it did not, run the postinstall script separately.
+
+```bash
+npm run postinstall
+```
 
 Once that's done, we can finally start writing code.
 
@@ -135,7 +143,7 @@ function App() {
       },
     })
   );
-  return <canvas id="myVizzu" style={ { width: "800px", height: "480px" } } />;
+  return <canvas id="myVizzu" style={{ width: "800px", height: "480px" }} />;
 }
 
 export default App;
@@ -186,7 +194,7 @@ function App() {
     <canvas
       ref={canvasRef}
       id="myVizzu"
-      style={ { width: "800px", height: "480px" } }
+      style={{ width: "800px", height: "480px" }}
     />
   );
 }
@@ -240,7 +248,7 @@ function App() {
 
   return (
     <div id="wrapper">
-      <canvas ref={canvasRef} style={ { width: "800px", height: "480px" } } />
+      <canvas ref={canvasRef} style={{ width: "800px", height: "480px" }} />
       <div id="breakdownChooser">
         <h2>Break it down by</h2>
         {dimensions.map((dim) => {
