@@ -1,7 +1,7 @@
 Using Vizzu with React and the usual tooling around it (namely, module bundlers) is not trivial.
 This document provides step-by-step instructions to setting up a working Vizzu project with React. For the sake of simplicity, we will use the create-react-app (CRA) package to scaffold our project but the lessons learnt can be applied to existing or new projects even if they don't use Webpack like CRA does.
 
-Let's go through this process together. If you're not interested in the detailed description, only the main takeaways, skip to the summary at the end.
+Let's go through this process together. If you're not interested in the detailed description, only the main takeaways, skip to the [summary](#summary) at the end.
 
 ## Bootstrap the application with CRA
 
