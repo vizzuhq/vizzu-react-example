@@ -1,4 +1,5 @@
 import Vizzu from "vizzu";
+import VizzuModule from './../node_modules/vizzu/dist/cvizzu.wasm';
 import { data } from "./demoData";
 import { useRef, useEffect, useState } from "react";
 import "./App.css";
@@ -21,6 +22,7 @@ function App() {
 
   useEffect(() => {
     if (chartRef.current) return; // this is needed because of Hot Module Replacement
+    Vizzu.options({ wasmUrl: VizzuModule });
     chartRef.current = new Vizzu(canvasRef.current, { data });
     chartRef.current.initializing.then((chart) =>
       chart.animate({
