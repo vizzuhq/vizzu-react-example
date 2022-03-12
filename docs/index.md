@@ -112,7 +112,7 @@ Replace the contents of src/App.js with the following.
 ```jsx
 // src/App.js
 import Vizzu from "vizzu";
-import VizzuModule from './../node_modules/vizzu/dist/cvizzu.wasm';
+import VizzuModule from 'vizzu/dist/cvizzu.wasm';
 import { data } from "./demoData";
 
 function App() {
@@ -163,7 +163,7 @@ We can rewrite our src/App.js accordingly:
 ```jsx
 // src/App.js
 import Vizzu from "vizzu";
-import VizzuModule from './../node_modules/vizzu/dist/cvizzu.wasm';
+import VizzuModule from 'vizzu/dist/cvizzu.wasm';
 import { data } from "./demoData";
 import { useRef, useEffect } from "react";
 
@@ -211,7 +211,7 @@ We could stop here, but there would have been absolutely no point in using React
 ```jsx
 //src/App.js
 import Vizzu from "vizzu";
-import VizzuModule from './../node_modules/vizzu/dist/cvizzu.wasm';
+import VizzuModule from 'vizzu/dist/cvizzu.wasm';
 import { data } from "./demoData";
 import { useRef, useEffect, useState } from "react";
 
