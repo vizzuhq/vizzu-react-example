@@ -5,6 +5,8 @@ import { useRef, useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
+  Vizzu.options({ wasmUrl: VizzuModule });
+
   const canvasRef = useRef();
   const chartRef = useRef();
   const [xDimensionState, setXDimensionState] = useState();
@@ -22,7 +24,6 @@ function App() {
 
   useEffect(() => {
     if (chartRef.current) return; // this is needed because of Hot Module Replacement
-    Vizzu.options({ wasmUrl: VizzuModule });
     chartRef.current = new Vizzu(canvasRef.current, { data });
     chartRef.current.initializing.then((chart) =>
       chart.animate({
