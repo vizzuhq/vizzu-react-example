@@ -282,7 +282,7 @@ Notice that we've added another `useRef()`. We need this to keep track of our `c
 
    - For Webpack (create-react-app, Next.js, Vite production mode):
 
-     1. Set the .wasm module location explicitely for Vizzu using `Vizzu.options({ wasmUrl })`
+     1. Set the .wasm module location explicitly for Vizzu using `Vizzu.options({ wasmUrl })`
      2. Override the webpack config (in case of CRA, use `react-app-rewired`) so it loads the .wasm file needed by Vizzu
 
 2. To use Vizzu in React
