@@ -1,7 +1,10 @@
 import Vizzu from "vizzu";
+import VizzuModule from 'vizzu/dist/cvizzu.wasm';
 import { data } from "./demoData";
 import { useRef, useEffect, useState } from "react";
 import "./App.css";
+
+Vizzu.options({ wasmUrl: VizzuModule });
 
 function App() {
   const canvasRef = useRef();

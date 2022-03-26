@@ -23,10 +23,10 @@ create-react-app does not provide a way to tinker with its Webpack config (only 
 ### Install the npm packages we need
 
 ```bash
-npm install react-app-rewired @open-wc/webpack-import-meta-loader
+npm install react-app-rewired
 ```
 
-react-app-rewired allows us to inject/override the Webpack configuration, while we need webpack-import-meta-loader because of how Vizzu imports its own .wasm file.
+react-app-rewired allows us to inject/override the Webpack configuration.
 
 ### Create a config-overrides.js file in the project's root
 
@@ -37,12 +37,7 @@ This file will be read by react-app-rewired at build-time and used to inject new
 module.exports = {
   webpack: function override(config, env) {
     config.module.rules.push({
-      test: /\.js$/,
-      loader: require.resolve("@open-wc/webpack-import-meta-loader"),
-    });
-
-    config.module.rules.push({
-      test: /\.wasm$/,
+      test: /cvizzu\.wasm$/,
       type: "javascript/auto",
       loader: "file-loader",
     });
@@ -54,7 +49,7 @@ module.exports = {
 
 ### Modify your package.json
 
-Here, we are going to make two changes. One, ensure that react-app-rewired is called instead of react-scripts, and that we have a postinstall script to copy Vizzu .wasm file to our public folder after installation.
+Here, we are going to make changes to ensure that react-app-rewired is called instead of react-scripts.
 You should change value of the `scripts` key in your package.json in the root of the project.
 
 ```diff
@@ -66,7 +61,6 @@ You should change value of the `scripts` key in your package.json in the root of
 +  "build": "react-app-rewired build",
   "test": "react-scripts test",
   "eject": "react-scripts eject",
-+  "postinstall": "mkdir -p public/node_modules/vizzu/dist && cp node_modules/vizzu/dist/cvizzu.wasm public/node_modules/vizzu/dist"
 }
 ```
 
@@ -75,15 +69,6 @@ You should change value of the `scripts` key in your package.json in the root of
 ```bash
 npm install vizzu
 ```
-
-Because of our postinstall setup above, this should also create a new folder in our public/ folder with the .wasm file in it.  
-If it did not, run the postinstall script separately.
-
-```bash
-npm run postinstall
-```
-
-Once that's done, we can finally start writing code.
 
 ## Simply following the example from the Vizzu docs in React will fail
 
@@ -127,7 +112,10 @@ Replace the contents of src/App.js with the following.
 ```jsx
 // src/App.js
 import Vizzu from "vizzu";
+import VizzuModule from 'vizzu/dist/cvizzu.wasm';
 import { data } from "./demoData";
+
+Vizzu.options({ wasmUrl: VizzuModule });
 
 function App() {
   const chart = new Vizzu("myVizzu", { data });
@@ -149,6 +137,10 @@ export default App;
 
 {%endraw%}
 
+Note, that we added an import statement for the .wasm module as well, and
+we set the module location for Vizzu manually. This will ensure that the 
+.wasm module will be loaded from the final location determined by Webpack. 
+
 Let's run it!
 
 ```bash
@@ -163,7 +155,7 @@ The problem is that both Vizzu and React want to modify the DOM directly and onc
 
 ### We need the useRef() hook
 
-As we have seen above Vizzu requires an imperative handle on the state of the canvas element, but we want React to be responsible for the overall structure of our page. In React Hooks this separation is usually accomplished using the `useRef()` and `useEffect()` hooks together (see (React docs)[https://reactjs.org/docs/hooks-reference.html#useref]).
+As we have seen above Vizzu requires an imperative handle on the state of the canvas element, but we want React to be responsible for the overall structure of our page. In React Hooks this separation is usually accomplished using the `useRef()` and `useEffect()` hooks together (see [React docs](https://reactjs.org/docs/hooks-reference.html#useref)).
 
 We can rewrite our src/App.js accordingly:
 
@@ -172,8 +164,11 @@ We can rewrite our src/App.js accordingly:
 ```jsx
 // src/App.js
 import Vizzu from "vizzu";
+import VizzuModule from 'vizzu/dist/cvizzu.wasm';
 import { data } from "./demoData";
 import { useRef, useEffect } from "react";
+
+Vizzu.options({ wasmUrl: VizzuModule });
 
 function App() {
   const canvasRef = useRef(null);
@@ -218,8 +213,11 @@ We could stop here, but there would have been absolutely no point in using React
 ```jsx
 //src/App.js
 import Vizzu from "vizzu";
+import VizzuModule from 'vizzu/dist/cvizzu.wasm';
 import { data } from "./demoData";
 import { useRef, useEffect, useState } from "react";
+
+Vizzu.options({ wasmUrl: VizzuModule });
 
 function App() {
   const canvasRef = useRef();
@@ -287,12 +285,8 @@ Notice that we've added another `useRef()`. We need this to keep track of our `c
 
    - For Webpack (create-react-app, Next.js, Vite production mode):
 
-     1. Make sure you have `@open-wc/webpack-import-meta-loader` installed
+     1. Set the .wasm module location explicitly for Vizzu using `Vizzu.options({ wasmUrl })`
      2. Override the webpack config (in case of CRA, use `react-app-rewired`) so it loads the .wasm file needed by Vizzu
-     3. Place the .wasm file in your public folder (public/node_modules/vizzu/dist/cvizzu.wasm)
-
-   - For Vite (for a working Vite project on a previous Vizzu release, see https://github.com/christopher-caldwell/vizzu-vite-demo/):
-     1. Place the .wasm file in your public folder (public/cvizzu.wasm)
 
 2. To use Vizzu in React
    - Make sure to use `useRef()` to access the DOM directly
