@@ -115,8 +115,9 @@ import Vizzu from "vizzu";
 import VizzuModule from 'vizzu/dist/cvizzu.wasm';
 import { data } from "./demoData";
 
+Vizzu.options({ wasmUrl: VizzuModule });
+
 function App() {
-  Vizzu.options({ wasmUrl: VizzuModule });
   const chart = new Vizzu("myVizzu", { data });
   chart.initializing.then((chart) =>
     chart.animate({
@@ -167,9 +168,9 @@ import VizzuModule from 'vizzu/dist/cvizzu.wasm';
 import { data } from "./demoData";
 import { useRef, useEffect } from "react";
 
-function App() {
-  Vizzu.options({ wasmUrl: VizzuModule });
+Vizzu.options({ wasmUrl: VizzuModule });
 
+function App() {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -216,9 +217,9 @@ import VizzuModule from 'vizzu/dist/cvizzu.wasm';
 import { data } from "./demoData";
 import { useRef, useEffect, useState } from "react";
 
-function App() {
-  Vizzu.options({ wasmUrl: VizzuModule });
+Vizzu.options({ wasmUrl: VizzuModule });
 
+function App() {
   const canvasRef = useRef();
   const chartRef = useRef();
   const [xDimensionState, setXDimensionState] = useState();

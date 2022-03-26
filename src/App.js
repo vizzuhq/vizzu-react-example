@@ -4,9 +4,9 @@ import { data } from "./demoData";
 import { useRef, useEffect, useState } from "react";
 import "./App.css";
 
-function App() {
-  Vizzu.options({ wasmUrl: VizzuModule });
+Vizzu.options({ wasmUrl: VizzuModule });
 
+function App() {
   const canvasRef = useRef();
   const chartRef = useRef();
   const [xDimensionState, setXDimensionState] = useState();
