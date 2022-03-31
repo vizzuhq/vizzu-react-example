@@ -3,6 +3,8 @@ This document provides step-by-step instructions to setting up a working Vizzu p
 
 Let's go through this process together. If you're not interested in the detailed description, only the main takeaways, skip to the [summary](#summary) at the end.
 
+> Note: This guide is for React 16.8 and above.
+
 ## Bootstrap the application with CRA
 
 First, let's allow create-react-app to take care of the basic setup of our app
