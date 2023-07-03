@@ -1,3 +1,5 @@
+> Note: This solution works from React 16.8 due to the use of built-in hooks.
+
 # Getting Started with Vizzu in React
 
 If you're here for a description, please see the docs on [Github Page](https://vizzuhq.github.io/vizzu-react-example/)
